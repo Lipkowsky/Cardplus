@@ -1,48 +1,57 @@
-// app/(root)/_layout.tsx
 import { Tabs } from "expo-router";
-import { Image, ImageSourcePropType, SafeAreaView, View } from "react-native";
-import { icons } from "@/constants";
-import { Text } from "react-native";
-import Header from "@/components/Header";
+import { SafeAreaView, Text, View } from "react-native";
 
+import Header from "@/components/Header";
+import { Ionicons } from "@expo/vector-icons";
+
+// Zaktualizowany komponent TabIcon
 const TabIcon = ({
-  source,
   focused,
-  label, // Dodajemy label, który będzie przekazywał nazwę zakładki
+  label, // Przekazujemy nazwę zakładki
 }: {
-  source: ImageSourcePropType;
   focused: boolean;
-  label: string; // Typ dla przekazywanej nazwy zakładki
-}) => (
-  <View
-    style={{
-      alignItems: "center",
-      justifyContent: "center",
-      paddingVertical: 5,
-      width: 40,
-    }}
-  >
-    <Image
-      source={source}
+  label: string;
+}) => {
+  let iconName: any;
+
+  switch (label) {
+    case "Home":
+      iconName = focused ? "home" : "home-outline"; // Focused - pełna ikona, inaczej outline
+      break;
+    case "Profile":
+      iconName = focused ? "person" : "person-outline"; // Focused - pełna ikona, inaczej outline
+      break;
+    default:
+      iconName = "home"; // Domyślnie ustawiamy home
+  }
+
+  return (
+    <View
       style={{
-        width: 24,
-        height: 24,
-        tintColor: focused ? "#0369a1" : "#B0B0B0",
-      }}
-      resizeMode="contain"
-    />
-    <Text
-      style={{
-        fontSize: 10,
-        color: focused ? "#0369a1" : "#B0B0B0", // Adjust the color based on focused state
-        marginTop: 4,
-        fontWeight: focused ? "600" : "400", // Adjust font weight for focus state
+        alignItems: "center",
+        justifyContent: "center",
+        paddingVertical: 5,
+        width: 40,
       }}
     >
-      {label}
-    </Text>
-  </View>
-);
+      <Ionicons
+        name={iconName} // Przypisanie ikony w zależności od zakładki
+        size={24}
+        color={focused ? "#0369a1" : "#B0B0B0"} // Kolor zależny od stanu "focused"
+      />
+      <Text
+        style={{
+          fontSize: 10,
+          color: focused ? "#0369a1" : "#B0B0B0",
+          marginTop: 4,
+          fontWeight: focused ? "600" : "400", // Waga czcionki zależna od stanu
+        }}
+      >
+        {label}
+      </Text>
+    </View>
+  );
+};
 
 export default function _layout() {
   return (
@@ -81,7 +90,7 @@ export default function _layout() {
             title: "Home",
             headerShown: false,
             tabBarIcon: ({ focused }) => (
-              <TabIcon source={icons.home} focused={focused} label="Home" /> // Przekazujemy nazwę zakładki "Home"
+              <TabIcon focused={focused} label="Home" /> // Przekazujemy nazwę zakładki "Home"
             ),
           }}
         />
@@ -93,7 +102,7 @@ export default function _layout() {
             title: "Profile",
             headerShown: false,
             tabBarIcon: ({ focused }) => (
-              <TabIcon source={icons.home} focused={focused} label="Profile" /> // Przekazujemy nazwę zakładki "Profile"
+              <TabIcon focused={focused} label="Profile" /> // Przekazujemy nazwę zakładki "Profile"
             ),
           }}
         />

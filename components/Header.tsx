@@ -20,15 +20,15 @@ const Header = () => {
   };
   return (
     <SafeAreaView className="bg-white">
-      <View className="flex flex-row mb-2 items-center pt-2 pb-2 pl-4 border-b border-sky-900">
-        <Text className="font-Poppins font-semibold text-black">
+      <View className="flex flex-row mb-2 items-center justify-around pt-2 pb-2 pl-4 border-b border-sky-900">
+        <Text className="font-Poppins font-semibold text-xs text-black">
           Witaj! {user?.emailAddresses[0].emailAddress!}
         </Text>
         <TouchableOpacity
           onPress={handleSignOut}
           className="justify-center items-end w-10 h-10 rounded-full bg-white ml-5"
         >
-          <Image source={icons.out} className="w-4 h-4" />
+          <Image source={icons.out} className="w-3 h-3" />
         </TouchableOpacity>
       </View>
     </SafeAreaView>
