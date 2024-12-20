@@ -110,22 +110,29 @@ const Home = () => {
   };
 
   const renderItem = ({ item }: { item: List }) => (
-    <View className="bg-emerald-500 m-2 p-3 rounded-lg flex-row">
+    <View className="bg-sky-700 m-2 p-2 rounded-lg flex-row">
       <View className="flex-3">
-        <Text className="text-white font-Poppins mb-4 text-2xl font-semibold">
+        <Text className="text-white font-Poppins mb-4 text-xl font-semibold">
           {item.title}
         </Text>
-        <Text className="text-white font-Poppins text-sm">
+        <Text className="text-white font-Poppins font-semibold text-xs">
           {moment(item.createdAt).format("DD-MM-YYYY")}
         </Text>
       </View>
 
-      <View className="flex-1 justify-center items-end mr-5 flex-row">
-        <TouchableOpacity onPress={() => handleIconPress(item)}>
-          <Ionicons name="arrow-forward-outline" size={40} color="black" />
+      <View className="flex-1 flex-row items-center justify-end">
+        <TouchableOpacity
+          className="mr-5"
+          onPress={() => handleIconPress(item)}
+        >
+          <Ionicons name="receipt-outline" size={25} color="white" />
         </TouchableOpacity>
-        <TouchableOpacity onPress={() => deleteList(item._id)}>
-          <Ionicons name="trash-outline" size={40} color="red" />
+
+        <TouchableOpacity
+          // Ustawienie kosza na koniec
+          onPress={() => deleteList(item._id)}
+        >
+          <Ionicons name="trash-outline" size={22} color="#ff3856" />
         </TouchableOpacity>
       </View>
     </View>
@@ -138,7 +145,7 @@ const Home = () => {
       <View className="flex w-full flex-row justify-center">
         <TouchableOpacity onPress={openNewListModal}>
           <View className="flex flex-row items-center mb-2 ">
-            <Ionicons name="add-circle" size={25} color="#0b6336" />
+            <Ionicons name="add-circle" size={25} color="#0369a1" />
             <Text className="ml-1 font-Poppins font-semibold">
               Dodaj nową listę
             </Text>

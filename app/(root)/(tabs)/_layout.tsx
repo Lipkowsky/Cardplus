@@ -8,9 +8,11 @@ import Header from "@/components/Header";
 const TabIcon = ({
   source,
   focused,
+  label, // Dodajemy label, który będzie przekazywał nazwę zakładki
 }: {
   source: ImageSourcePropType;
   focused: boolean;
+  label: string; // Typ dla przekazywanej nazwy zakładki
 }) => (
   <View
     style={{
@@ -25,22 +27,20 @@ const TabIcon = ({
       style={{
         width: 24,
         height: 24,
-        tintColor: focused ? "#FF6347" : "#B0B0B0",
+        tintColor: focused ? "#0369a1" : "#B0B0B0",
       }}
       resizeMode="contain"
     />
-    {focused && (
-      <Text
-        style={{
-          fontSize: 10,
-          color: "#FF6347",
-          marginTop: 4,
-          fontWeight: "600",
-        }}
-      >
-        Active
-      </Text>
-    )}
+    <Text
+      style={{
+        fontSize: 10,
+        color: focused ? "#0369a1" : "#B0B0B0", // Adjust the color based on focused state
+        marginTop: 4,
+        fontWeight: focused ? "600" : "400", // Adjust font weight for focus state
+      }}
+    >
+      {label}
+    </Text>
   </View>
 );
 
@@ -50,8 +50,8 @@ export default function _layout() {
       <Header />
       <Tabs
         screenOptions={{
-          tabBarActiveTintColor: "#FF6347",
-          tabBarInactiveTintColor: "#B0B0B0",
+          tabBarActiveTintColor: "#0369a1",
+          tabBarInactiveTintColor: "#0369a1",
           tabBarShowLabel: false,
           tabBarStyle: {
             backgroundColor: "#ffffff",
@@ -81,7 +81,7 @@ export default function _layout() {
             title: "Home",
             headerShown: false,
             tabBarIcon: ({ focused }) => (
-              <TabIcon source={icons.home} focused={focused} />
+              <TabIcon source={icons.home} focused={focused} label="Home" /> // Przekazujemy nazwę zakładki "Home"
             ),
           }}
         />
@@ -93,10 +93,11 @@ export default function _layout() {
             title: "Profile",
             headerShown: false,
             tabBarIcon: ({ focused }) => (
-              <TabIcon source={icons.home} focused={focused} />
+              <TabIcon source={icons.home} focused={focused} label="Profile" /> // Przekazujemy nazwę zakładki "Profile"
             ),
           }}
         />
+
         <Tabs.Screen
           name="details"
           options={{

@@ -19,9 +19,8 @@ const Header = () => {
     router.replace("/(auth)/sign-in");
   };
   return (
-    <SafeAreaView className="bg-white  ">
-      <View className="flex flex-row  items-center pt-6 pb-4 pl-4 border-b border-emerald-800">
-        <Image source={icons.account} className="w-6 h-6 mx-2" />
+    <SafeAreaView className="bg-white">
+      <View className="flex flex-row mb-2 items-center pt-2 pb-2 pl-4 border-b border-sky-900">
         <Text className="font-Poppins font-semibold text-black">
           Witaj! {user?.emailAddresses[0].emailAddress!}
         </Text>
