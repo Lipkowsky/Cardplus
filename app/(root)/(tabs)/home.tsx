@@ -16,6 +16,7 @@ import { fetchAuthToken } from "@/lib/auth";
 import { useAuth } from "@clerk/clerk-expo";
 import { List } from "@/types/type";
 import mongoose from "mongoose";
+import { router } from "expo-router";
 
 const Home = () => {
   const { getToken } = useAuth();
@@ -45,8 +46,9 @@ const Home = () => {
     fetchData(); // Call fetchData when the component mounts
   }, []); // Dependency array to re-fetch if getToken changes
 
-  const handleIconPress = () => {
-    console.log("CLICK");
+  const handleIconPress = (item: List) => {
+    const { _id } = item;
+    router.push({ pathname: "/details", params: { id: _id } });
   };
 
   const openNewListModal = () => {
@@ -119,7 +121,7 @@ const Home = () => {
       </View>
 
       <View className="flex-1 justify-center items-end mr-5 flex-row">
-        <TouchableOpacity onPress={handleIconPress}>
+        <TouchableOpacity onPress={() => handleIconPress(item)}>
           <Ionicons name="arrow-forward-outline" size={40} color="black" />
         </TouchableOpacity>
         <TouchableOpacity onPress={() => deleteList(item._id)}>
@@ -132,10 +134,10 @@ const Home = () => {
   const keyExtractor = (item: List) => item._id.toString(); // Ensure _id is a string
 
   return (
-    <SafeAreaView className="flex h-full p-2 bg-white">
-      <View className="flex w-full flex-row justify-center mx-auto">
+    <View className="flex h-full p-2 bg-white">
+      <View className="flex w-full flex-row justify-center">
         <TouchableOpacity onPress={openNewListModal}>
-          <View className="flex flex-row items-center mb-2 mt-2">
+          <View className="flex flex-row items-center mb-2 ">
             <Ionicons name="add-circle" size={25} color="#0b6336" />
             <Text className="ml-1 font-Poppins font-semibold">
               Dodaj nową listę
@@ -191,7 +193,7 @@ const Home = () => {
         renderItem={renderItem}
         keyExtractor={keyExtractor} // Use the updated key extractor
       />
-    </SafeAreaView>
+    </View>
   );
 };
 

@@ -1,10 +1,11 @@
 import { fetchAuthToken } from "@/lib/auth";
+import { User } from "@/types/type";
 import { useAuth } from "@clerk/clerk-expo";
 import { useEffect, useState } from "react";
 import { Text, View, ActivityIndicator } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 
-const Home = () => {
+const Profile = () => {
   const { getToken, userId } = useAuth();
   const [user, setUser] = useState<User | null>(null);
   const [loading, setLoading] = useState<boolean>(true); // Loading state
@@ -54,12 +55,12 @@ const Home = () => {
   }
 
   return (
-    <SafeAreaView className="flex h-full p-8 bg-white">
+    <View className="flex h-full  bg-white">
       <View className="flex w-full flex-row items-center">
         <Text className="text-black text-xl">Hello {user.name}</Text>
       </View>
-    </SafeAreaView>
+    </View>
   );
 };
 
-export default Home;
+export default Profile;
