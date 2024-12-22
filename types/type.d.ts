@@ -24,7 +24,11 @@ interface Participant {
 
 // Define the interface for the List item
 export interface ListItem {
-  _id: mongoose.Types.ObjectId; // ObjectId reference to the ListItem model
+  _id: mongoose.Types.ObjectId;
+  name: string;
+  addedAt: Date;
+  createdBy: User;
+  quantity: number;
 }
 
 // Define the main List interface
